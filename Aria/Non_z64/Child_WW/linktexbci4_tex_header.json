@@ -1,0 +1,12 @@
+{
+  "Format": "C4",
+  "PaletteFormat": "RGB565",
+  "WrapS": "ClampToEdge",
+  "WrapT": "ClampToEdge",
+  "MagFilter": "Linear",
+  "MinFilter": "Linear",
+  "AlphaSetting": 0,
+  "LodBias": 0,
+  "unknown2": 0,
+  "unknown3": 0
+}

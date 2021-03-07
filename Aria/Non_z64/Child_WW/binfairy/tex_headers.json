@@ -1,0 +1,32 @@
+[
+  {
+    "unknown2": 0,
+    "unknown3": 67,
+    "Name": "BinFairy",
+    "Format": "CMPR",
+    "AlphaSetting": 204,
+    "WrapS": "ClampToEdge",
+    "WrapT": "ClampToEdge",
+    "PaletteFormat": "IA8",
+    "MinFilter": "Linear",
+    "MagFilter": "Linear",
+    "MinLOD": 0,
+    "MagLOD": 0,
+    "LodBias": 0
+  },
+  {
+    "unknown2": 0,
+    "unknown3": 0,
+    "Name": "BinFairy",
+    "Format": "CMPR",
+    "AlphaSetting": 0,
+    "WrapS": "ClampToEdge",
+    "WrapT": "ClampToEdge",
+    "PaletteFormat": "IA8",
+    "MinFilter": "Linear",
+    "MagFilter": "Linear",
+    "MinLOD": 0,
+    "MagLOD": 0,
+    "LodBias": 0
+  }
+]
