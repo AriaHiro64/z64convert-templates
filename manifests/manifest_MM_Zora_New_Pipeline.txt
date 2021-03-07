@@ -1,0 +1,187 @@
+DICTIONARY
+    //
+    // For use with decompressed 1.0 MM only!
+    //
+    VROM_CODE             	0x00B3C000           // start of code within rom
+	 TABLE_ACTOR			  	0x109510				// start of actor table within code
+    TABLE_OBJECT          	0x11CC80             // start of object table within code
+    VROM_OBJ              	O_0x14D               // object to overwrite
+	 VROM_EN_ZOT			  	A_552				// Zora (Land)
+    // HIERARCHY_CODE        	0x11A348‬             // Relative to the start of code;
+                                               // Link's hierarchy pointer will
+                                               // be written at this address
+
+    SEG                   	0x06000000           // ram segment
+
+    OBJ_CHILD             	0x014D              // object_link_child object number
+
+    // Hierarchy
+    DL_WAIST		0x00AB40	        "riggedmesh.Waist" // this is the name zzconvert automatically uses
+	 DL_RTHIGH		0x009E00 	        "riggedmesh.Thigh.R"
+    DL_RSHIN		0x00A108        	"riggedmesh.Shin.R"
+	 DL_RFOOT		0x00A108        	"riggedmesh.Foot.R"
+	 DL_LTHIGH		0x00A4A0        	"riggedmesh.Thigh.L"
+	 DL_LSHIN		0x00A7A8        	"riggedmesh.Shin.L"
+	 DL_LFOOT		0x00AA10        	"riggedmesh.Foot.L"
+	 DL_HEAD			0x00B170        	"riggedmesh.Head"
+	 DL_HAT			0x00B630        	"riggedmesh.Hat"
+	 DL_COLLAR		0x00AD38        	"riggedmesh.Collar"
+	 DL_LSHOULDER	0x00BEE8        	"riggedmesh.Shoulder.L"
+	 DL_LFOREARM	0x00C020        	"riggedmesh.Forearm.L"
+	 DL_RSHOULDER	0x00B820        	"riggedmesh.Shoulder.R"
+	 DL_RFOREARM	0x00B990        	"riggedmesh.Forearm.R"
+	 DL_TORSO		0x00C048        	"riggedmesh.Torso"
+
+    // Hands
+    DL_LHAND                    0x00FDF0        "riggedmesh.Hand.L"
+    DL_LFIST                    0x00C270        "Fist.L"
+    DL_LFIN						0x00CC38        "Fin.L"
+    DL_LFIN_SWIM                0x010868        "Fin.Swim.L"
+    DL_LHAND_BOTTLE             0x010D08        "Bottle.Hand.L"
+    DL_RHAND                    0x00FBB8        "riggedmesh.Hand.R"
+    DL_RFIST                    0x00BBE0        "Fist.R"
+    DL_RFIN                     0x00CDA0        "Fin.R"
+    DL_RFIN_SWIM                0x010978        "Fin.Swim.R"
+    DL_GUITAR_HAND              0x00E088        "Hand.Guitar.L"
+
+    // Other
+    DL_ZORA_GUITAR              0x00E2A0        "Guitar"
+    DL_FIN_SHIELD               0x0110A8        "Shield"
+    DL_ELECTRIC_CONE            0x011760        "Electricity"
+
+// Skeletons
+  SK_MAIN             0x0   "skeleton.riggedmesh"
+
+END
+
+
+OBJECT POOL=0x5000,0x800 
+  
+  // 0x06005000
+  MAGIC_12A70:
+    HexString(FF 14 20 40 FE 0A 20 40 03 14 20 40 F4 0A 40 20);
+  
+  // 0x06005010
+  MAGIC_12A80:
+    HexString(03 00 00 01 06 00 50 00 FC 00 00 01 06 00 50 08);
+  
+END
+
+REPOINT
+	GoTo(VROM_CODE+0x11A54C);
+	Write32(DL_WAIST);                   		// Waist
+	Write32(DL_WAIST);
+
+	GoTo(VROM_CODE+0x11A63C);                    // Left Hand
+	Write32(DL_LHAND);
+	Write32(DL_LHAND);
+
+	GoTo(VROM_CODE+0x11A664);                    // Left Hand
+	Write32(DL_LHAND);
+	Write32(DL_LHAND);
+
+	GoTo(VROM_EN_ZOT+0x334C);                    // Left Hand
+	Write32(DL_LHAND);
+
+	GoTo(VROM_CODE+0x11A68C);                    // Left Fist
+	Write32(DL_LFIST);
+	Write32(DL_LFIST);
+
+	GoTo(VROM_CODE+0x11A6b4);                    // Left Fist
+	Write32(DL_LFIST);
+	Write32(DL_LFIST);
+
+	GoTo(VROM_CODE+0x11A7F0);                    // Left Fist
+	Write32(DL_LFIST);
+
+	GoTo(VROM_CODE+0x11Aff4);                    // Left Fin
+	Write32(DL_LFIN);
+
+	GoTo(VROM_CODE+0x11AFFC);                    // Left Swimming Fin
+	Write32(DL_LFIN_SWIM);
+
+	GoTo(VROM_CODE+0x11A6f4);                    // Right Hand
+	Write32(DL_RHAND);
+	Write32(DL_RHAND);
+
+	GoTo(VROM_CODE+0x11A744);                    // Right Hand
+	Write32(DL_RHAND);
+	Write32(DL_RHAND);
+
+	GoTo(VROM_CODE+0x11A76c);                    // Right Hand
+	Write32(DL_RHAND);
+	Write32(DL_RHAND);
+
+	GoTo(VROM_CODE+0x11A794);                    // Right Hand
+	Write32(DL_RHAND);
+	Write32(DL_RHAND);
+
+	GoTo(VROM_CODE+0x11A818);
+	Write32(DL_RHAND);
+	GoTo(VROM_CODE+0x11A82c);
+	Write32(DL_RHAND);
+
+	GoTo(VROM_CODE+0x11A71C);                    // Right Fist
+	Write32(DL_RFIST);
+	Write32(DL_RFIST);
+
+	GoTo(VROM_CODE+0x11AFF8);                    // Right Fin
+	Write32(DL_RFIN);
+
+	GoTo(VROM_CODE+0x11B000);                    // Right Swimming Fin
+	Write32(DL_RFIN_SWIM);
+
+	GoTo(VROM_CODE+0x11A7BC);                    // Outstreched Left Hand (for holding bottles)
+	Write32(DL_LHAND_BOTTLE);
+	Write32(DL_LHAND_BOTTLE);
+
+	GoTo(VROM_CODE+0x11A6B4);                    // Left Fist
+	Write32(DL_LFIST);
+
+	GoTo(VROM_CODE+0x11A804);                    // Right Shoulder
+	Write32(DL_RSHOULDER);
+
+	GoTo(VROM_CODE+0x80522);
+	Hi32(DL_ZORA_GUITAR);
+	GoTo(VROM_CODE+0x80526);
+	Lo32(DL_ZORA_GUITAR);
+
+	GoTo(VROM_CODE+0x805A2);                      // Hardcodded Right Hand
+	Hi32(DL_RHAND);
+	GoTo(VROM_CODE+0x805A6);
+	Lo32(DL_RHAND);
+
+	GoTo(VROM_CODE+0x804C6);                      // Hard Codded Left Hand
+	Hi32(DL_LHAND);
+	GoTo(VROM_CODE+0x804CA);
+	Lo32(DL_LHAND);
+
+
+	GoTo(VROM_CODE+0x83072);                      // Guitar Hand
+	Hi32(DL_GUITAR_HAND);
+	GoTo(VROM_CODE+0x83076);
+	Lo32(DL_GUITAR_HAND);
+
+	GoTo(VROM_CODE+0x811A6);
+	Hi32(DL_FIN_SHIELD);
+	GoTo(VROM_CODE+0x811AA);
+	Lo32(DL_FIN_SHIELD);
+	  
+	GoTo(VROM_CODE+0x7FA12);
+	Hi32(DL_ELECTRIC_CONE);
+	GoTo(VROM_CODE+0x7FA16);
+	Lo32(DL_ELECTRIC_CONE);
+
+	GoTo(VROM_CODE+0x7F90A);                      //Do Magic Branch Stuff
+	Hi32(MAGIC_12A80);
+	GoTo(VROM_CODE+0x7F916);
+	Lo32(MAGIC_12A80);
+	
+	GoTo(VROM_CODE+0x7F97C);
+	HexString(10 00 00 1B 00 00 00 00); //Do Magic Branch Stuff
+
+    // skeleton pointer
+   GoTo(VROM_CODE+0x11A348‬);
+   Write32(SK_MAIN);
+
+END

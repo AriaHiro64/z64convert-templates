@@ -1,0 +1,116 @@
+DICTIONARY
+    //
+    // For use with decompressed 1.0 MM only!
+    //
+    VROM_CODE             0x00B3C000           // start of code within rom
+    TABLE_OBJECT          0x11CC80             // start of object table within code
+    VROM_OBJ              O_0x10               // object to overwrite
+    VROM_PLAYER           0xCA7F00            // start of ovl_player_actor within rom
+	
+	//HIERARCHY_CODE        0x11A340            // Relative to the start of code;
+                                               // Link's hierarchy pointer will
+                                               // be written at this address
+    SEG                   0x06000000           // ram segment
+ 
+    OBJ_BOY               0x0010               // object_link_boy object number
+
+    // Hierarchy
+    DL_WAIST                    0x0049E0        "riggedmesh.Waist"
+    DL_RTHIGH                   0x004C50        "riggedmesh.Thigh.R"
+    DL_RSHIN                    0x004F48        "riggedmesh.Shin.R"
+    DL_RFOOT                    0x005190        "riggedmesh.Foot.R"
+    DL_LTHIGH                   0x0052A0        "riggedmesh.Thigh.L"
+    DL_LSHIN                    0x0055D0        "riggedmesh.Shin.L"
+    DL_LFOOT                    0x005818        "riggedmesh.Foot.L"
+    DL_HEAD                     0x005928        "riggedmesh.Head"
+    DL_HAT                      0x005A78        "riggedmesh.Hat"
+    DL_COLLAR                   0x0060E8        "riggedmesh.Collar"
+    DL_LSHOULDER                0x006A58        "riggedmesh.Shoulder.L"
+    DL_LFOREARM                 0x006C38        "riggedmesh.Forearm.L"
+    DL_RSHOULDER                0x006410        "riggedmesh.Shoulder.R"
+    DL_RFOREARM                 0x0065E0        "riggedmesh.Forearm.R"
+    DL_SHEATH   	        0x006370 	"riggedmesh.Sheath"
+    DL_TORSO                    0x006148        "riggedmesh.Torso"
+	
+    // Hands
+    DL_LHAND                    0x006EB8        "riggedmesh.Hand.L"
+    DL_LHAND_BOTTLE             0x007820        "Bottle.Hand.L"
+    DL_RHAND                    0x0067D8        "riggedmesh.Hand.R"
+    //DL_LFIST                    0x0080F0        "Fist.L"
+
+	// Other
+	DL_HELIX_SWORD              0x007F28        "Sword.1"
+	DL_BOTTLE_FILLING		    0x007A50	    "Bottle.Filling"
+	DL_BOTTLE_EMPTY 		    0x007AD0        "Bottle.Empty"
+
+// Skeletons
+  SK_MAIN             0x0   "skeleton.riggedmesh"
+
+END
+
+OBJECT
+
+    DL_DF_COMMAND: // just an ordinary DF command
+          HexString(DF 00 00 00 00 00 00 00);
+
+    DL_LHAND_SWORD:
+        CallList( DL_LHAND );
+        CallList( DL_HELIX_SWORD );
+
+
+END
+
+REPOINT
+    GoTo(VROM_CODE+0x11A53C);    // Waist'
+    Write32( DL_WAIST );
+    Write32( DL_WAIST );
+    GoTo( VROM_CODE+0x11A7AC );    // Bottle Hand
+    Write32( DL_LHAND_BOTTLE );
+    Write32( DL_LHAND_BOTTLE );
+    GoTo(VROM_CODE+0x11A7D4);    // FPS Left shoulder
+    Write32( DL_LSHOULDER);
+    GoTo(VROM_CODE+0x11A7E8);    // FPS Left Hand
+    Write32( DL_LHAND);
+
+//Hands
+		
+	GoTo(VROM_CODE+0x11A6E4); //Right Hand
+	Write32( DL_RHAND );
+	Write32( DL_RHAND );
+    GoTo(VROM_CODE+0x11A70C); //??
+	Write32( DL_RHAND );
+	Write32( DL_RHAND );	
+	GoTo(VROM_CODE+0x11A734); //Bow
+	Write32( DL_RHAND );
+	Write32( DL_RHAND );
+	GoTo(VROM_CODE+0x11A75C); //Ocarina
+	Write32( DL_RHAND );
+	Write32( DL_RHAND );
+	GoTo(VROM_CODE+0x11A784); //Hookshot
+	Write32( DL_RHAND );
+	Write32( DL_RHAND );
+	GoTo(VROM_CODE+0x11A810); //FPS Bow
+	Write32( DL_RHAND );
+    GoTo(VROM_CODE+0x11A824); //FPS Hookshot
+	Write32( DL_RHAND );
+    Write32( DL_RHAND );
+
+//Left Hand
+
+	GoTo(VROM_CODE+0x11A654); // Left Hand
+	Write32( DL_LHAND );
+	Write32( DL_LHAND );
+	GoTo(VROM_CODE+0x11A67C); // Left Fist
+	Write32( DL_LHAND );
+	Write32( DL_LHAND );
+	GoTo(VROM_CODE+0x11A6A4); // Broad Sword
+	Write32( DL_LHAND );
+	Write32( DL_LHAND );
+    GoTo(VROM_CODE+0x11A62C);  //Long Sword
+	Write32( DL_LHAND_SWORD );
+    	Write32( DL_LHAND_SWORD );
+
+    // skeleton pointer
+   GoTo(VROM_CODE+0x11A340);
+   Write32(SK_MAIN);
+END
