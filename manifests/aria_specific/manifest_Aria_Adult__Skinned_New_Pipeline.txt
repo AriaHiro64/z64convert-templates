@@ -97,6 +97,10 @@ OBJECT POOL=0x5000,0x800
 	// 0x06005010
 	DL_SWORD_SHEATHED_MATRIX_WRAPPER:
 		CallMatrix( MATRIX_SWORD_BACK_A );
+	
+	DL_DF_COMMAND: // just an ordinary DF command
+          HexString(DF 00 00 00 00 00 00 00);	
+
 
 	DL_SWORD_SHEATHED: // Sheathed Sword
 		CallList( DL_SWORD_SHEATHED_MATRIX_WRAPPER );
@@ -221,8 +225,6 @@ OBJECT POOL=0x5000,0x800
 		CallList( DL_GAUNT_RFOREARM );
 		CallList( DL_CUFF_RFOREARM );
 
-        DL_DF_COMMAND: // just an ordinary DF command
-          HexString(DF 00 00 00 00 00 00 00);	
 END
 
 REPOINT

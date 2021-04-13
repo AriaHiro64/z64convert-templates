@@ -37,13 +37,19 @@ asm(".section .text \n\
 #define  TUNIC_GORON     0x0200
 #define  TUNIC_ZORA      0x0300
 
+#define  SWORD_NONE      0x0000
 #define  SWORD_KOKIRI    0x0001
 #define  SWORD_MASTER    0x0002
 #define  SWORD_GORON     0x0003
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ this is static display list sourcery that doesnt move
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 #define MATRIX_SWORD_BACK_A              0x06005000
 #define MATRIX_SWORD_BACK_B              0x06005040
 #define DL_SWORD_SHEATHED_MATRIX_WRAPPER 0x06005080
+#define DL_DF_COMMAND                    0x06005090
 
 void renderinit(void *zobj)
 {
@@ -77,6 +83,13 @@ void renderinit(void *zobj)
     {
         switch (curSword)
         {
+            case SWORD_NONE:
+                QVLO(DL_HILT_2_PROXY) = DL_DF_COMMAND;
+                QVLO(DL_BLADE_2_PROXY) = DL_DF_COMMAND;
+                QVLO(DL_SHEATH_PROXY) = DL_DF_COMMAND;
+                QVLO(DL_SWORD_SHEATHED_MATRIX_WRAPPER) = MATRIX_SWORD_BACK_B;
+                break;
+
            case SWORD_KOKIRI:
                 QVLO(DL_HILT_2_PROXY) = DL_HILT_1;
                 QVLO(DL_BLADE_2_PROXY) = DL_BLADE_1;
