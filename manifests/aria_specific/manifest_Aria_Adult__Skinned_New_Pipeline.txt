@@ -25,8 +25,8 @@ DICTIONARY
 	DL_TORSO			  0x00C048	"riggedmesh.Torso"
 
 	// Hands
-	DL_LHAND			    0x013890	"riggedmesh.Hand.L"
-	DL_RHAND			    0x0153C0	"riggedmesh.Hand.R"
+	DL_LHAND			    0x013890	"Hand.L"
+	DL_RHAND			    0x0153C0	"Hand.R"
 	DL_LFIST			    0x013DF0	"Fist.L"
 	DL_RFIST			    0x015928	"Fist.R"
 	DL_LHAND_BOTTLE			0x014310	"Bottle.Hand.L"
@@ -47,7 +47,6 @@ DICTIONARY
 	DL_HAMMER			      0x0184A8	"Hammer"
 	DL_BOTTLE			      0x0188e8	"Bottle"
 	DL_BOW				      0x019810	"Bow"
-	DL_OCARINA_FAIRY		  0x019AE0	"Ocarina.1"
 	DL_OCARINA_TIME		  0x019AE0	"Ocarina.2"
 	DL_HOOKSHOT		    	0x019FC0	"Hookshot"
 	DL_BOOMERANG            0x018BC0    "Boomerang"
@@ -67,9 +66,9 @@ DICTIONARY
 	DL_BOOT_RHOVER		0x01FC80	"Foot.3.R"
 
 	// First Person
-	DL_FPS_RHAND	  	0x01D1C8	"FPS.Hand.R"
+	
 	DL_FPS_HOOKSHOT		0x020728	"FPS.Hookshot"
-	DL_FPS_RHAND_SHOT      0x01D1C8    "FPS.Hand.Shot"
+	DL_FPS_ARM_SHOT 	0x015928	"FPS.Arm.Shot"
 
 	// Misc
 	DL_HOOKSHOT_CHAIN	0x020BA0	"Hookshot.Chain"
@@ -86,9 +85,10 @@ END
 // Matrix( XR, YR, ZR, XT, YT, ZT, XS, YS, ZS );
 
 OBJECT POOL=0x5000,0x800
+
 	// 0x06005000
 	MATRIX_SWORD_BACK_A: // KNIFE Matrix
-		Matrix( 0, 90, 0, -180, -221, 1100, 1, 1, 1 );
+		Matrix( 0, 90, 0, -130, -350, 1100, 1, 1, 1 );
 
 	// 0x06005008
 	MATRIX_SWORD_BACK_B:
@@ -116,6 +116,9 @@ OBJECT POOL=0x5000,0x800
 
 	MATRIX_SHIELD_MIRROR_BACK:
       Matrix( 0, 0, 0, 0, 0, 0, 1, 1, 1 );
+
+	MATRIX_SHOT:
+      Matrix( 0, 0, 90, 0, 0, 0, 1, 1, 1 );
 
 	
     DL_SHIELD_MIRROR:
@@ -191,7 +194,6 @@ OBJECT POOL=0x5000,0x800
 
 	DL_RFIST_BOW:
 		CallList( DL_BOW );
-		CallList( DL_RFIST );
 
 	DL_RFIST_HOOKSHOT:
 		CallList( DL_HOOKSHOT );
@@ -201,17 +203,15 @@ OBJECT POOL=0x5000,0x800
 		CallList( DL_OCARINA_TIME );
 		CallList( DL_RHAND );
 
-	DL_RHAND_OCARINA_FAIRY:
-		CallList( DL_OCARINA_FAIRY );
-		CallList( DL_RHAND );
-
 	DL_FPS_RHAND_BOW:
 		CallList( DL_BOW );
-		CallList( DL_FPS_RHAND_SHOT );
 
 	DL_FPS_LHAND_HOOKSHOT:
 		CallList( DL_FPS_HOOKSHOT );
-		CallList( DL_FPS_RHAND );
+		CallList( DL_RFIST );
+		CallMatrix( MATRIX_SHOT );
+		CallList( DL_RFOREARM );
+
 
 	DL_LFIST_BOOMERANG:
      		CallList( DL_BOOMERANG );
@@ -289,8 +289,8 @@ REPOINT
 		Write32( DL_WAIST );					//	Waist (Low Poly)
 		Write32( DL_RFIST_BOW );				//	Right Fist + Fairy Bow (and/or Fairy Slinghot?) (High Poly)
 		Write32( DL_RFIST_BOW );				//	Right Fist + Fairy Bow (and/or Fairy Slinghot?) (Low Poly)
-		Write32( DL_RHAND_OCARINA_FAIRY );		//	Right Hand + Fairy Ocarina (High Poly)
-		Write32( DL_RHAND_OCARINA_FAIRY );		//	Right Hand + Fairy Ocarina (Low Poly)
+		Write32( DL_RHAND_OCARINA_TIME );		//	Right Hand + Fairy Ocarina (High Poly)
+		Write32( DL_RHAND_OCARINA_TIME );		//	Right Hand + Fairy Ocarina (Low Poly)
 		Write32( DL_RHAND_OCARINA_TIME );		//	Right Hand + Ocarina of Time (High Poly)
 		Write32( DL_RHAND_OCARINA_TIME );		//	Right Hand + Ocarina of Time (Low Poly)
 		Write32( DL_RFIST_HOOKSHOT );			//	Right Fist + Hookshot / Longshot (High Poly)

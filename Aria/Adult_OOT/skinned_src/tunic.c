@@ -17,6 +17,7 @@ asm(".section .text \n\
 #else
 #  include <z64ovl/oot/debug.h>
 #endif
+#include <z64ovl/oot/shared.h>
 #include <z64ovl/helpers.h>
 #include <z64ovl/oot/sfx.h>
 #include "adult.h"
@@ -33,6 +34,7 @@ asm(".section .text \n\
 #define  EQUIPPED_TUNIC  (EQUIPPED_GEAR & 0x0F00)
 #define  EQUIPPED_BOOTS  (EQUIPPED_GEAR & 0xF000)
 
+#define  TUNIC_TOPLESS   0x0000
 #define  TUNIC_KOKIRI    0x0100
 #define  TUNIC_GORON     0x0200
 #define  TUNIC_ZORA      0x0300
@@ -66,6 +68,7 @@ void renderinit(void *zobj)
         void *overwrite = (void*)zh_seg2ram(PROXY_RIGGEDMESH);
         switch (curTunic)
         {
+             
             case TUNIC_KOKIRI:
                 proxy = proxy_Kokiri;
                 break;
@@ -74,6 +77,9 @@ void renderinit(void *zobj)
                 break;
             case TUNIC_ZORA:
                 proxy = proxy_Zora;
+                break;
+            default:
+                proxy = proxy_Topless;
                 break;
         }
         z_bcopy(proxy, overwrite, proxySize);
@@ -110,4 +116,39 @@ void renderinit(void *zobj)
         }
         prevSword = curSword;
     }
+
+    const uint32_t eyesDay[] = {
+    TEX_EYES_PNG_0
+    , TEX_EYES_PNG_1
+    , TEX_EYES_PNG_2
+    , TEX_EYES_PNG_3
+    , TEX_EYES_PNG_4
+    , TEX_EYES_PNG_5
+    , TEX_EYES_PNG_6
+    , TEX_EYES_PNG_7
+};
+const uint32_t eyesNight[] = {
+    TEX_EYES_NIGHT_PNG_0
+    , TEX_EYES_NIGHT_PNG_1
+    , TEX_EYES_NIGHT_PNG_2
+    , TEX_EYES_NIGHT_PNG_3
+    , TEX_EYES_NIGHT_PNG_4
+    , TEX_EYES_NIGHT_PNG_5
+    , TEX_EYES_NIGHT_PNG_6
+    , TEX_EYES_NIGHT_PNG_7
+};
+
+/* TODO updating pointers based on day/night
+ *      left as an exercise for the student
+ */
+int isNight = *(uint32_t*)Z64GL_IS_NIGHT;
+static int wasNight = -1;
+if (isNight != wasNight)
+{
+    void *src = eyesDay;
+    wasNight = isNight;
+    if (isNight)
+        src = eyesNight;
+    z_bcopy(src, (void*)0x80125FD8, sizeof(eyesDay));
+}
 }

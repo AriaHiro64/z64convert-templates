@@ -39,7 +39,7 @@ DICTIONARY
     DL_LHAND_BOTTLE             0x01DFA8        "Bottle.Hand.L"
     DL_RHAND                    0x00F998        "riggedmesh.Hand.R"
     DL_RFIST                    0x00FD08        "Fist.R"
-		DL_FPS_LFIST                    0x00F548        "FPS.Hand.L"
+		DL_FPS_LFIST                    0x00F548        "Fist.L"
 
     // Equipment
     DL_SHIELD_MIRROR_FACE       0x015F98	      "Shield.2.Face"
@@ -65,7 +65,7 @@ DICTIONARY
 
 
     // First-Person
-    DL_FPS_RIGHT_ARM            0x017EC0        "FPS.Forearm.R"
+    //DL_FPS_RIGHT_ARM            0x017EC0        "FPS.Forearm.R"
 
     // Misc
     DL_BOW_STRING               0x017818         "Bow.String"
@@ -165,12 +165,14 @@ OBJECT
 
       DL_FPS_RARM_HOOKSHOT:
             CallList( DL_HOOKSHOT );
-            CallList( DL_FPS_RIGHT_ARM );
+             CallList( DL_RFIST);
+             CallList( DL_RFOREARM);
             //CallList( DL_FPS_RIGHT_ARM );
 
       DL_FPS_RARM_BOW:
             CallList( DL_BOW );
-            CallList( DL_FPS_RIGHT_ARM);
+            CallList( DL_RFIST);
+             CallList( DL_RFOREARM);
             //CallList( DL_FPS_RIGHT_ARM );
 			
       DL_DF_COMMAND: // just an ordinary DF command

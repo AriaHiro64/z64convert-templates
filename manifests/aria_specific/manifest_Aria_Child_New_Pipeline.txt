@@ -14,25 +14,25 @@ DICTIONARY
   OBJ_CHILD              0x0015        // object_link_child object number
 
   // Hierarchy
-  DL_WAIST           0x011A80   "riggedmesh.1.Waist" // new spec uses skeleton bone names
-  DL_RTHIGH          0x012128   "riggedmesh.1.Thigh.R"
-  DL_RSHIN           0x012670   "riggedmesh.1.Shin.R"
-  DL_RFOOT           0x012B90   "riggedmesh.1.Foot.R"
-  DL_LTHIGH          0x013140   "riggedmesh.1.Thigh.L"
-  DL_LSHIN           0x013688   "riggedmesh.1.Shin.L"
-  DL_LFOOT           0x013BA8   "riggedmesh.1.Foot.L"
-  DL_HEAD            0x0148D8   "riggedmesh.1.Head"
-  DL_HAT             0x0151E8   "riggedmesh.1.Hat"
-  DL_COLLAR          0x0153C0   "riggedmesh.1.Collar"
-  DL_LSHOULDER       0x015780   "riggedmesh.1.Shoulder.L"
-  DL_LFOREARM        0x015BC0   "riggedmesh.1.Forearm.L"
-  DL_RSHOULDER       0x017340   "riggedmesh.1.Shoulder.R"
-  DL_RFOREARM        0x017780   "riggedmesh.1.Forearm.R"
-  DL_TORSO           0x016A18   "riggedmesh.1.Torso"
+  DL_WAIST           0x011A80   "riggedmesh.Waist" // new spec uses skeleton bone names
+  DL_RTHIGH          0x012128   "riggedmesh.Thigh.R"
+  DL_RSHIN           0x012670   "riggedmesh.Shin.R"
+  DL_RFOOT           0x012B90   "riggedmesh.Foot.R"
+  DL_LTHIGH          0x013140   "riggedmesh.Thigh.L"
+  DL_LSHIN           0x013688   "riggedmesh.Shin.L"
+  DL_LFOOT           0x013BA8   "riggedmesh.Foot.L"
+  DL_HEAD            0x0148D8   "riggedmesh.Head"
+  DL_HAT             0x0151E8   "riggedmesh.Hat"
+  DL_COLLAR          0x0153C0   "riggedmesh.Collar"
+  DL_LSHOULDER       0x015780   "riggedmesh.Shoulder.L"
+  DL_LFOREARM        0x015BC0   "riggedmesh.Forearm.L"
+  DL_RSHOULDER       0x017340   "riggedmesh.Shoulder.R"
+  DL_RFOREARM        0x017780   "riggedmesh.Forearm.R"
+  DL_TORSO           0x016A18   "riggedmesh.Torso"
 
   // Hands
-  DL_LHAND             0x016090   "riggedmesh.1.Hand.L"
-  DL_RHAND             0x017AD0   "riggedmesh.1.Hand.R"
+  DL_LHAND             0x016090   "riggedmesh.Hand.L"
+  DL_RHAND             0x017AD0   "riggedmesh.Hand.R"
   DL_LFIST             0x016458   "Fist.L"
   DL_LHAND_BOTTLE      0x016EB8    "Bottle.Hand.L"
   DL_RFIST             0x017E90   "Fist.R"
@@ -47,7 +47,6 @@ DICTIONARY
   DL_BOOMERANG         0x019900  "Boomerang"
   DL_SHIELD_DEKU       0x019D58  "Shield.1"
   DL_SHIELD_HYLIAN     0x019FA0  "Shield.2"
-  DL_SHIELD_MIRROR     0x02f138  "Shield.3"
   DL_SLINGSHOT         0x01A3C8  "Slingshot"
   DL_OCARINA_FAIRY     0x01A6D0  "Ocarina.1"
   DL_OCARINA_TIME      0x01A958  "Ocarina.2"
@@ -74,7 +73,7 @@ DICTIONARY
 
   
   // Skeletons
-  SK_MAIN             0x0   "skeleton.riggedmesh.1"
+  SK_MAIN             0x0   "skeleton.riggedmesh"
 END
 
 // Matrix function parameters:
@@ -120,17 +119,13 @@ OBJECT POOL=0x5000,0x800
     CallMatrix( MATRIX_SHIELD_BACK );
     CallList( DL_SHIELD_HYLIAN );
 
-  DL_SHIELD_MIRROR_BACK:
-    CallMatrix( MATRIX_SHIELD_BACK );
-    CallList( DL_SHIELD_MIRROR );
-
-  DL_SWORD_SHIELD_MIRROR:
+  DL_SWORD_SHIELD_HYLIAN:
     CallList( DL_SWORD_SHEATHED );
-    CallList( DL_SHIELD_MIRROR_BACK );
+    CallList( DL_SHIELD_HYLIAN_BACK );
 
-  DL_SHEATH0_MIRROR:
+  DL_SHEATH0_HYLIAN:
     CallList( DL_SWORD_SHEATH );
-    CallList( DL_SHIELD_MIRROR_BACK );
+    CallList( DL_SHIELD_HYLIAN_BACK );
 
   DL_LFIST_SWORD:             // Left Fist + Kokiri Sword
     CallList( DL_SWORD_HILT );
@@ -152,8 +147,8 @@ OBJECT POOL=0x5000,0x800
     CallList( DL_SHIELD_DEKU );
     CallList( DL_RFIST );
 
-  DL_RFIST_SHIELD_MIRROR:
-    CallList( DL_SHIELD_MIRROR );
+  DL_RFIST_SHIELD_HYLIAN:
+    CallList( DL_SHIELD_HYLIAN );
     CallList( DL_RFIST );
 
   DL_RFIST_SLINGSHOT:           // Right Fist + Fairy Slingshot
@@ -200,16 +195,16 @@ REPOINT
     Write32( DL_RFIST_SHIELD_DEKU );             //  Right Fist + Deku Shield (Low Poly)
     Write32( DL_RFIST_SHIELD_HYLIAN );           //  Right Fist + Hylian Shield (High Poly)
     Write32( DL_RFIST_SHIELD_HYLIAN );           //  Right Fist + Hylian Shield (Low Poly)
-    Write32( DL_RFIST_SHIELD_MIRROR );           //  Right Fist + Mirror Shield (High Poly)
-    Write32( DL_RFIST_SHIELD_MIRROR );           //  Right Fist + Mirror Shield (Low Poly)
+    Write32( DL_RFIST_SHIELD_HYLIAN );           //  Right Fist + HYLIAN Shield (High Poly)
+    Write32( DL_RFIST_SHIELD_HYLIAN );           //  Right Fist + HYLIAN Shield (Low Poly)
     Write32( DL_SWORD_SHEATHED );                //  Sheathed Sword (High Poly)
     Write32( DL_SWORD_SHEATHED );                //  Sheathed Sword (Low Poly)
     Write32( DL_SWORD_SHIELD_DEKU );             //  Deku Shield + Sheathed Sword (High Poly)
     Write32( DL_SWORD_SHIELD_DEKU );             //  Deku Shield + Sheathed Sword (Low Poly)
     Write32( DL_SWORD_SHIELD_HYLIAN );           //  Hylian Shield + Sheathed Sword (High Poly)
     Write32( DL_SWORD_SHIELD_HYLIAN );           //  Hylian Shield + Sheathed Sword (Low Poly)
-    Write32( DL_SWORD_SHIELD_MIRROR );           //  Mirror Shield + Sheathed Sword (High Poly)
-    Write32( DL_SWORD_SHIELD_MIRROR );           //  Mirror Shield + Sheathed Sword (Low Poly)
+    Write32( DL_SWORD_SHIELD_HYLIAN );           //  HYLIAN Shield + Sheathed Sword (High Poly)
+    Write32( DL_SWORD_SHIELD_HYLIAN );           //  HYLIAN Shield + Sheathed Sword (Low Poly)
     Write32( 0x00000000 );                       //  ? (High Poly)
     Write32( 0x00000000 );                       //  ? (Low Poly)
     Write32( DL_SHIELD_DEKU_BACK );              //  Deku Shield without Sheath (High Poly)
@@ -220,8 +215,8 @@ REPOINT
     Write32( DL_SHEATH0_DEKU );                  //  Deku Shield + Sheath (Low Poly)
     Write32( DL_SHEATH0_HYLIAN );                //  Hylian Shield + Sheath (High Poly)
     Write32( DL_SHEATH0_HYLIAN );                //  Hylian Shield + Sheath (Low Poly)
-    Write32( DL_SHEATH0_MIRROR );                //  Mirror Shield + Sheath (High Poly)
-    Write32( DL_SHEATH0_MIRROR );                //  Mirror Shield + Sheath (Low Poly)
+    Write32( DL_SHEATH0_HYLIAN );                //  HYLIAN Shield + Sheath (High Poly)
+    Write32( DL_SHEATH0_HYLIAN );                //  HYLIAN Shield + Sheath (Low Poly)
     Write32( 0x00000000 );                       //  ? (High Poly)
     Write32( 0x00000000 );                       //  ? (Low Poly)
     Write32( DL_SHIELD_DEKU_BACK );              //  Deku Shield without Sheath (High Poly)
